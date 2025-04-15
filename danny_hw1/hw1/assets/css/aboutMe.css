@@ -1,0 +1,93 @@
+/* author: DANIEL DETJEN */ 
+
+@media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    h1, h2, h3, h4 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    table {
+        width: 100%; 
+    }
+
+    td, th {
+        font-size: 14px;
+        padding: 20px; 
+    }
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    color: navy;
+    line-height: 1.5;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Times New Roman', Times, serif;
+    color: navy;
+    line-height: 1.5;
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Times New Roman', Times, serif;
+    color: navy;
+    line-height: 1.5;
+    text-align: center;
+}
+
+h4 {
+    font-family: 'Times New Roman', Times, serif;
+    color: navy;
+    line-height: 1.5;
+    text-align: center;
+}
+
+
+body {
+    background-color:azure ;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    margin: 0 auto;
+
+}
+td{
+    border: 3px solid black;
+    text-align: center;
+}
+
+th {
+    padding: 20px;
+    text-align: center;
+    background-color: #050505;
+    color: white;
+    }
+    
+    tr:nth-of-type(odd) {
+    color: #ffffff;
+    background-color:black;
+    border: white;
+    }
+    tr:nth-of-type(even) {
+    background-color: #ffffff;
+    border: black;
+    }
+    
