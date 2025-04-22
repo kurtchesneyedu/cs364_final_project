@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+</head>
+<body>
+    <h2>Form Submitted Successfully!</h2>
+
+    <p><strong>Name:</strong> <span id="name"></span></p>
+    <p><strong>Email:</strong> <span id="email"></span></p>
+
+    <a href="form.html">Go back</a>
+
+    <script>
+        // Extract URL parameters
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById("name").textContent = params.get("name");
+        document.getElementById("email").textContent = params.get("email");
+    </script>
+</body>
+</html>
+
