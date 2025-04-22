@@ -4,36 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
     <script defer src="register.js"> </script>
 </head>
 <body>
-    <form id="register-form" onsubmit="register(event)">
-      <fieldset>
-      <legend>R Form</legend>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="username" required>
-        <br>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-
-        <label for="role">Role:</label>
-        <select id="role" name="role" required>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-        </select>
-        <br>
-
-        <button type="submit">Register</button>
-      </fieldset>
-    </form>
-    <hr>
-    <a href="index.html">return to index page</a>
+    <section class="login-page">
+        <div class="login-container">
+            <h1>Register Account</h1>
+            <form id="register-form" onsubmit="register(event)">
+                <label for="name">Username:</label>
+                <input type="text" id="name" name="username" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <label for="role">Role:</label>
+                <select id="role" name="role" required class="login-input">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+                
+                <div class="button-group">
+                    <button type="submit">Register</button>
+                    <button onclick="window.location.href='frontpage.html'" class="register-button" type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </section>
 </body>
 </html>
 
