@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontpage</title>
+    <title>One Touch Timer</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="loginStatus.js"> </script>
 </head>
 <body>
@@ -13,6 +14,128 @@
        <li> <a href="index.html">index.html</a>   </li>
        <li> <a href="dashboard.html">Admin Dashboard</a> </li>
     </ul>
-</body>
-</html>
-
+    <header>
+        <nav>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="how-to.html">How To</a></li>
+          </ul>
+        </nav>
+      </header>
+    
+      <main>
+    
+    <!-- Home Page -->
+      <section class="home-page">
+        <h1>One Touch Timer</h1>
+        <p>A one button, multi sport, athlete based timer.</p>
+        <div class="dropdown-container">
+          <div class="dropdown">
+            <button class="dropdown-btn" id="sport-btn">Sport</button>
+            <div class="dropdown-content" id="sport-dropdown">
+              <a href="#" onclick="updateSportButton(this)">Football</a>
+              <a href="#" onclick="updateSportButton(this)">Swimming</a>
+              <a href="#" onclick="updateSportButton(this)">Track</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropdown-btn" id="team-btn">Team</button>
+            <div class="dropdown-content" id="team-dropdown">
+              <a href="#" onclick="updateTeamButton(this)">Air Force</a>
+              <a href="#" onclick="updateTeamButton(this)">Navy</a>
+              <a href="#" onclick="updateTeamButton(this)">West Point</a>
+              <a href="#" onclick="updateTeamButton(this)">Southern Illinois</a>
+            </div>
+          </div><div class="dropdown">
+            <button class="dropdown-btn" id="athlete-btn">Athlete</button>
+            <div class="dropdown-content" id="athlete">
+              <a href="#" onclick="updateAthleteButton(this)">Danny Detjen</a>
+              <a href="#" onclick="updateAthleteButton(this)">Kurt Chesney</a>
+              <a href="#" onclick="updateAthleteButton(this)">Dante Cantalupo</a>
+              <a href="#" onclick="updateAthleteButton(this)">Jeff Hemmes</a>
+            </div>
+          </div><div class="dropdown">
+            <button class="dropdown-btn" id="event-btn">Event</button>
+            <div class="dropdown-content" id="event-dropdown">
+              <a href="#" onclick="updateEventButton(this)">400 IM</a>
+              <a href="#" onclick="updateEventButton(this)">100 Free</a>
+              <a href="#" onclick="updateEventButton(this)">200 Free</a>
+            </div>
+          </div>
+        </div>
+        <div class="timer-container">
+          <span id="timer">00:00:00</span>
+        </div>
+        <div class="buttons-container">
+          <button class="primary-button" id="main-button">START</button>
+          <button class="secondary-button" id ="reset-button">RESET</button>
+        </div>
+        <table class="timer-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Hack</th>
+            </tr>
+          </thead>
+          <tbody id="timer-table-body"></tbody>
+        </table>    
+        <table class="recent-times">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Athlete</th>
+              <th>Event</th>
+              <th>Elapsed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2023-04-15</td>
+              <td>Danny Detjen</td>
+              <td>100 Free</td>
+              <td>31.20 s</td>
+            </tr>
+            <tr>
+              <td>2023-04-14</td>
+              <td>Kurt Chesney</td>
+              <td>40 yd Dash</td>
+              <td>4.50 s</td>
+            </tr>
+            <tr>
+              <td>2023-04-13</td>
+              <td>Dante Cantalupo</td>
+              <td>Coding</td>
+              <td>1000000.00 s</td>
+            </tr>
+            <tr>
+              <td>2023-04-12</td>
+              <td>Jeff Hemmes</td>
+              <td>Dijkstra's (by hand)</td>
+              <td>3.00 s</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    
+      <!-- Login Page -->
+    <section class="login-page">
+      <div class="login-container">
+        <form>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </section>
+    </main>
+      
+      <footer>
+        <p>&copy; 2025 OneTouchTimer. All rights reserved.</p>
+      </footer>
+      <script src="script.js"></script>
+    </body>
+    </html>
+    
+    
