@@ -6,22 +6,19 @@
     <title>One Touch Timer</title>
     <link rel="stylesheet" href="styles.css">
     <script src="loginStatus.js"> </script>
+    <script defer src="login.js"></script>
 </head>
 <body>
-    <h1>FRONTPAGE of Web App</h1>
-    <p id="user-status">Checking login status...</p>
-    <ul>
-       <li> <a href="index.html">index.html</a>   </li>
-       <li> <a href="dashboard.html">Admin Dashboard</a> </li>
-    </ul>
     <header>
         <nav>
           <ul>
+            <li id="user-status">Checking login status...</li>
             <li><a href="about.html">About</a></li>
-            <li><a href="how-to.html">How To</a></li>
+            <li><a href="how-to.html">Tutorial</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
           </ul>
         </nav>
-      </header>
+    </header>
     
       <main>
     
@@ -120,12 +117,15 @@
       <!-- Login Page -->
     <section class="login-page">
       <div class="login-container">
-        <form>
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password">
-          <button type="submit">Login</button>
+        <form id="login-form" onsubmit="login(event)">
+          <label for="user_field">Username:</label>
+          <input type="text" id="user_field" name="username" required>
+          <label for="password_field">Password:</label>
+          <input type="password" id="password_field" name="password" required>
+          <div class="button-group">
+            <button type="submit">Login</button>
+            <button onclick="window.location.href='register.html'" class="register-button" type="button">Register</button>
+          </div>
         </form>
       </div>
     </section>
@@ -137,5 +137,4 @@
       <script src="script.js"></script>
     </body>
     </html>
-    
-    
+
