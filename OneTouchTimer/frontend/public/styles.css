@@ -1,7 +1,4 @@
 /* General Styles */
-body {
-  background-color: lightblue;
-}
 
 body {
   font-family: Arial, sans-serif;
@@ -451,4 +448,21 @@ select.login-input:focus {
 .recent-times {
   margin-left: auto;
   margin-right: auto;
+}
+
+#timerList tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#timerList tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+
+.striped-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.striped-table tr:nth-child(odd) {
+  background-color: #ffffff;
 }

@@ -25,7 +25,7 @@ function updateEventButton(element) {
   button.textContent = element.textContent;
 }
 
-function updateMainButton() {
+async function updateMainButton() {
   var mainButton = document.getElementById("main-button");
   switch (mainButtonState) {
     case 0:
@@ -39,12 +39,36 @@ function updateMainButton() {
       addTimerEntry("Split");
       mainButtonState = 2;
       break;
-    case 2:
+      case 2:
         mainButton.textContent = "START";
         stopTimer();
-        addTimerEntry("Stop", new Date().getTime() - startTime);
+        const finalElapsed = new Date().getTime() - startTime;
+        addTimerEntry("Stop", finalElapsed);
         mainButtonState = 0;
+    
+        const sport = document.getElementById("sport-btn").textContent;
+        const team = document.getElementById("team-btn").textContent;
+        const athlete = document.getElementById("athlete-btn").textContent;
+        const event = document.getElementById("event-btn").textContent;
+        const elapsed = formatTime(finalElapsed); // formatted string
+    
+        try {
+            const response = await fetch("/api/save-timer", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ sport, team, athlete, event, elapsed })
+            });
+    
+            const result = await response.json();
+            if (!result.success) {
+                alert("Timer not saved.");
+            }
+        } catch (error) {
+            console.error("Failed to save timer:", error);
+            alert("An error occurred while saving the timer.");
+        }
         break;
+    
   }
 }
 

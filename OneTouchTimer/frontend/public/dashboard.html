@@ -1,27 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <script defer src="dashboard.js"></script>
-    <script src="loginStatus.js"> </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="dashboard.js"></script>
+  <script src="loginStatus.js"></script>
 </head>
 <body>
-    <h2>Admin Dashboard</h2>
-    <p id="user-status">Checking login status...</p>
-    <a href="frontpage.html"> frontpage </a><br><br>
+  <header>
+    <nav>
+      <ul>
+        <li id="user-status">Checking login status...</li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="how-to.html">Tutorial</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <table border="1">
+  <main>
+    <section class="home-page">
+      <h2>Admin Dashboard</h2>
+      <a href="frontpage.html" class="home-button">Frontpage</a>
+
+      <!-- User Table -->
+      <h2>Registered Users</h2>
+      <table class="striped-table recent-times">
         <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-            </tr>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
         </thead>
         <tbody id="userList"></tbody>
-    </table>
+      </table>
+
+      <!-- Timer Table Header & Controls -->
+      <h2>Saved Timer Results</h2>
+      <div class="dropdown-container">
+        <label for="timerLimit">Show latest:</label>
+        <select id="timerLimit" class="login-input">
+          <option value="5" selected>5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="all">All</option>
+        </select>
+
+        <button id="clearTimersBtn" class="register-button">Clear All</button>
+      </div>
+
+      <!-- Timer Table -->
+      <table class="striped-table recent-times">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Sport</th>
+            <th>Team</th>
+            <th>Athlete</th>
+            <th>Event</th>
+            <th>Elapsed</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody id="timerList"></tbody>
+      </table>
+    </section>
+  </main>
 </body>
 </html>
-

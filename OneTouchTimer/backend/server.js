@@ -21,6 +21,28 @@ app.use(
   })
 );
 
+//timer
+app.post("/save-timer", async (req, res) => {
+  const user = req.session.user;
+  if (!user) return res.status(403).json({ message: "Not logged in" });
+
+  const { sport, team, athlete, event, elapsed } = req.body;
+
+  const query = `
+    INSERT INTO timer_results (username, sport, team, athlete, event, elapsed)
+    VALUES ($1, $2, $3, $4, $5, $6)
+  `;
+  const values = [user.username, sport, team, athlete, event, elapsed];
+
+  try {
+    await pool.query(query, values);
+    res.json({ success: true, message: "Timer result saved" });
+  } catch (err) {
+    console.error("Error saving timer result:", err);
+    res.status(500).json({ success: false, message: "Error saving timer" });
+  }
+});
+
 // app.post("/register", auth.register);
 app.post("/register", async (req, res) => {
 
@@ -62,6 +84,36 @@ app.get("/users", auth.ensureAdmin, async (req, res) => {
   res.json(result.rows);
 });
 
+//timer
+app.get("/timers", auth.ensureAdmin, async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM timer_results ORDER BY created_at DESC");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching timer results:", err);
+    res.status(500).json({ message: "Error fetching timers" });
+  }
+});
+
+async function truncateTimers() {
+  if (!confirm("Are you sure you want to delete ALL timer results?")) return;
+
+  const response = await fetch("/api/timers", {
+      method: "DELETE",
+      credentials: "include"
+  });
+
+  const result = await response.json();
+  if (result.success) {
+      alert("Timer results cleared.");
+      fetchTimers(); // refresh table
+  } else {
+      alert("Failed to clear timer results.");
+  }
+}
+
+
+
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.json({ message: "Logged out" });
@@ -74,5 +126,6 @@ app.get("/session", (req, res) => {
         res.json({ loggedIn: false });
     }
 });
+
 
 app.listen(3000, () => console.log("Server running on port 3000"));
