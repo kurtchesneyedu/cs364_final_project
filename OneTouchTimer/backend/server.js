@@ -21,8 +21,13 @@ app.use(
   })
 );
 
-// Add this new route before your existing routes
+// Replace or modify the existing /api/timers route
 app.get("/api/timers", async (req, res) => {
+    // Check if user is logged in
+    if (!req.session.user) {
+        return res.status(401).json({ message: "Not logged in" });
+    }
+
     try {
         const query = `
             SELECT * FROM timer_results 

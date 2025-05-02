@@ -149,6 +149,14 @@ async function updateRecentTimes() {
         const response = await fetch("/api/timers?limit=5", {
             credentials: "include"
         });
+        
+        if (response.status === 401) {
+            // User is not logged in - clear the table
+            const tbody = document.querySelector(".recent-times tbody");
+            tbody.innerHTML = "<tr><td colspan='4'>Please log in to view recent times</td></tr>";
+            return;
+        }
+
         if (!response.ok) {
             throw new Error("Failed to fetch recent times");
         }
@@ -156,6 +164,11 @@ async function updateRecentTimes() {
         const times = await response.json();
         const tbody = document.querySelector(".recent-times tbody");
         tbody.innerHTML = ""; // Clear existing rows
+
+        if (times.length === 0) {
+            tbody.innerHTML = "<tr><td colspan='4'>No recent times available</td></tr>";
+            return;
+        }
 
         times.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
              .slice(0, 5)
@@ -171,6 +184,8 @@ async function updateRecentTimes() {
              });
     } catch (error) {
         console.error("Error fetching recent times:", error);
+        const tbody = document.querySelector(".recent-times tbody");
+        tbody.innerHTML = "<tr><td colspan='4'>Must be logged in as ADMIN to view records</td></tr>";
     }
 }
 
