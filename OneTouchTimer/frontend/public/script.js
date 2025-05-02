@@ -62,6 +62,9 @@ async function updateMainButton() {
             const result = await response.json();
             if (!result.success) {
                 alert("Timer not saved.");
+            } else {
+                // Add this line to update the recent times table
+                await updateRecentTimes();
             }
         } catch (error) {
             console.error("Failed to save timer:", error);
@@ -141,6 +144,36 @@ function updateTimerTable() {
     }
 }
 
+async function updateRecentTimes() {
+    try {
+        const response = await fetch("/api/timers?limit=5", {
+            credentials: "include"
+        });
+        if (!response.ok) {
+            throw new Error("Failed to fetch recent times");
+        }
+        
+        const times = await response.json();
+        const tbody = document.querySelector(".recent-times tbody");
+        tbody.innerHTML = ""; // Clear existing rows
+
+        times.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+             .slice(0, 5)
+             .forEach(time => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${new Date(time.created_at).toLocaleDateString()}</td>
+                    <td>${time.athlete}</td>
+                    <td>${time.event}</td>
+                    <td>${time.elapsed}</td>
+                `;
+                tbody.appendChild(row);
+             });
+    } catch (error) {
+        console.error("Error fetching recent times:", error);
+    }
+}
+
 // Add event listeners to the buttons
 document.getElementById("main-button").addEventListener("click", updateMainButton);
 document.getElementById("reset-button").addEventListener("click", resetMainButton);
@@ -173,3 +206,7 @@ function toggleDropdown() {
 function updateDropdownButton(button, element) {
   button.textContent = element.textContent;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateRecentTimes();
+});

@@ -21,6 +21,22 @@ app.use(
   })
 );
 
+// Add this new route before your existing routes
+app.get("/api/timers", async (req, res) => {
+    try {
+        const query = `
+            SELECT * FROM timer_results 
+            ORDER BY created_at DESC 
+            LIMIT 5
+        `;
+        const result = await pool.query(query);
+        res.json(result.rows);
+    } catch (err) {
+        console.error("Error fetching timer results:", err);
+        res.status(500).json({ message: "Error fetching timers" });
+    }
+});
+
 //timer
 app.post("/save-timer", async (req, res) => {
   const user = req.session.user;
