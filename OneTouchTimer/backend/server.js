@@ -95,22 +95,53 @@ app.get("/timers", auth.ensureAdmin, async (req, res) => {
   }
 });
 
-async function truncateTimers() {
-  if (!confirm("Are you sure you want to delete ALL timer results?")) return;
+//delete/truncate
+app.delete("/timers", auth.ensureAdmin, async (req, res) => {
+  console.log("DELETE /timers called by:", req.session?.user?.username);
 
-  const response = await fetch("/api/timers", {
-      method: "DELETE",
-      credentials: "include"
-  });
-
-  const result = await response.json();
-  if (result.success) {
-      alert("Timer results cleared.");
-      fetchTimers(); // refresh table
-  } else {
-      alert("Failed to clear timer results.");
+  try {
+    await pool.query("TRUNCATE TABLE timer_results");
+    res.json({ success: true, message: "Timer results cleared." });
+  } catch (err) {
+    console.error("Error truncating timer_results:", err);
+    res.status(500).json({ success: false, message: "Failed to clear timers." });
   }
-}
+});
+
+
+//insert test data
+app.post("/timers/test", auth.ensureAdmin, async (req, res) => {
+  try {
+    const testEntry = {
+      username: "Danny",
+      sport: "Swimming",
+      team: "Test Team",
+      athlete: "Test Athlete",
+      event: "100 Free",
+      elapsed: "00:00:01.23"
+    };
+
+    const query = `
+      INSERT INTO timer_results (username, sport, team, athlete, event, elapsed)
+      VALUES ($1, $2, $3, $4, $5, $6)
+    `;
+    const values = [
+      testEntry.username,
+      testEntry.sport,
+      testEntry.team,
+      testEntry.athlete,
+      testEntry.event,
+      testEntry.elapsed
+    ];
+
+    await pool.query(query, values);
+    res.json({ success: true, message: "Test timer result inserted." });
+  } catch (err) {
+    console.error("Error inserting test row:", err);
+    res.status(500).json({ success: false, message: "Failed to insert test data." });
+  }
+});
+
 
 
 

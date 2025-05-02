@@ -1,3 +1,8 @@
+//DOCUMENTATION STATEMENT: We used ChatGPT to create date (insert test row date, etc) and
+//also github copilot was used sparingly. We use L27 demo code (all of it)
+//We used ChatGPT to get the CSS working, it told us to insert include mimetypes in nginx.conf
+//Used class resources, slides, examples, etc.
+
 //file: dashboard.js
 // used by dashboard.html to fetch users from the database
 // and udpate HTML table with user data
@@ -86,6 +91,22 @@ async function clearTimers() {
     }
 }
 
+//insert hardcoded test data
+async function insertTestRow() {
+    const response = await fetch("/api/timers/test", {
+      method: "POST",
+      credentials: "include"
+    });
+  
+    const result = await response.json();
+    if (result.success) {
+      alert("Test row inserted!");
+      fetchTimers();
+    } else {
+      alert("Failed to insert test row.");
+    }
+  }  
+
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchUsers();
@@ -98,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("clearTimersBtn").addEventListener("click", clearTimers);
+    document.getElementById("insertTestBtn").addEventListener("click", insertTestRow);
 });
 
 

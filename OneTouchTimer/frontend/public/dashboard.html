@@ -40,17 +40,21 @@
 
       <!-- Timer Table Header & Controls -->
       <h2>Saved Timer Results</h2>
-      <div class="dropdown-container">
-        <label for="timerLimit">Show latest:</label>
-        <select id="timerLimit" class="login-input">
-          <option value="5" selected>5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="all">All</option>
-        </select>
-
-        <button id="clearTimersBtn" class="register-button">Clear All</button>
-      </div>
+        <div class="dropdown-container">
+            <label for="timerLimit">Show latest:</label>
+            <select id="timerLimit" class="login-input">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="all">All</option>
+            </select>
+        </div>
+        
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+            <button id="clearTimersBtn" class="register-button">Clear All</button>
+            <button id="insertTestBtn" class="register-button">Insert Test Row</button>
+        </div>
+      
 
       <!-- Timer Table -->
       <table class="striped-table recent-times">
